@@ -25,9 +25,9 @@ extras_require = {
 }
 
 setuptools.setup(
-    name="jupyter-panel-server",
+    name="jupyter-panel-proxy",
     packages=setuptools.find_packages(),
-    description='Jupyter Server for Panel applications',
+    description='Jupyter Server Proxy for Panel applications',
     long_description=open('README.md').read() if os.path.isfile('README.md') else 'Consult README.md',
     long_description_content_type="text/markdown",
     author= "PyViz developers",
@@ -38,7 +38,7 @@ setuptools.setup(
     license='BSD',
     entry_points={
         'jupyter_serverproxy_servers': [
-            'panel_server = panel_server:setup_panel_server',
+            'panel = panel_server:setup_panel_server',
         ]
     },
     install_requires=['jupyter-server-proxy', 'panel'],
