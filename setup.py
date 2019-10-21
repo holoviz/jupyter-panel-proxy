@@ -63,6 +63,12 @@ setuptools.setup(
     author_email= "developers@pyviz.org",
     maintainer= "PyViz developers",
     maintainer_email= "developers@pyviz.org",
+    url="https://github.com/pyviz/jupyter-panel-proxy",
+    project_urls = {
+        "Bug Tracker": "http://github.com/pyviz/jupyter-panel-proxy/issues",
+        "Documentation": "https://github.com/pyviz/jupyter-panel-proxy/blob/master/README.md",
+        "Source Code": "https://github.com/pyviz/jupyter-panel-proxy",
+    },
     platforms=['Windows', 'Mac OS X', 'Linux'],
     license='BSD',
     entry_points={
