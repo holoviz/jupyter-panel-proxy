@@ -1,7 +1,5 @@
-"""
-Only targetting pypi since dep package jupyter-server-proxy is only
-available on conda-forge, so a pyviz package wouldn't be solvable.
-"""
+# Only targetting pypi since dep package jupyter-server-proxy is only
+# available on conda-forge, so a pyviz package wouldn't be solvable.
 
 language: generic
 os: linux
