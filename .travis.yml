@@ -44,7 +44,7 @@ jobs:
         - pip install pyctdev && doit ecosystem=conda miniconda_install && pip uninstall -y doit pyctdev
         - export PATH="$HOME/miniconda/bin:$PATH" && hash -r
         - conda config --set always_yes True
-        - conda install -c pyviz pyctdev && doit ecosystem=condaecosystem_setup
+        - conda install -c pyviz pyctdev && doit ecosystem=conda ecosystem_setup
       before_script:
         - travis_wait 60 doit ecosystem=conda package_build $CHANS $PKG_TEST_PYTHON --test-group=lint
       script: doit ecosystem=conda package_upload --token=$ANACONDA_TOKEN $LABELS
