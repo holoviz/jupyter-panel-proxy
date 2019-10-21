@@ -21,7 +21,8 @@ def get_setup_version(reponame):
         return json.load(open(version_file_path, 'r'))['version_string']
 
 extras_require = {
-    'build': ['param >=1.7.0', 'setuptools']
+    'build': ['param >=1.7.0', 'setuptools'],
+    'tests': ['flake8'],
 }
 
 setuptools.setup(
