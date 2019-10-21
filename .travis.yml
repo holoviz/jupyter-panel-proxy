@@ -1,11 +1,13 @@
+"""
+Only targetting pypi since dep package jupyter-server-proxy is only
+available on conda-forge, so a pyviz package wouldn't be solvable.
+"""
+
 language: generic
 os: linux
 
 env:
   global:
-    - CHANS="-c conda-forge -c pyviz"
-    - LABELS_DEV="--label dev"
-    - LABELS_REL="--label dev --label main"
     - PYENV_VERSION=3.7
     - PKG_TEST_PYTHON="--test-python=py37 --test-python=py27"
 
@@ -37,27 +39,11 @@ jobs:
         - doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
       script: doit package_upload -u $PYPIUSER -p $PYPIPASS --pypi ${PYPI}
 
-    - &conda_pkg
-      stage: dev_package
-      env: LABELS=$LABELS_DEV
-      install:
-        - pip install pyctdev && doit ecosystem=conda miniconda_install && pip uninstall -y doit pyctdev
-        - export PATH="$HOME/miniconda/bin:$PATH" && hash -r
-        - conda config --set always_yes True
-        - conda install -c pyviz pyctdev && doit ecosystem=conda ecosystem_setup
-      before_script:
-        - travis_wait 60 doit ecosystem=conda package_build $CHANS $PKG_TEST_PYTHON --test-group=lint
-      script: doit ecosystem=conda package_upload --token=$ANACONDA_TOKEN $LABELS
-
     ## release packages
 
     - <<: *pip_pkg
       env: PYPI=pypi PYPIUSER=$PPU PYPIPASS=$PPP
       stage: package
-
-    - <<: *conda_pkg
-      stage: package
-      env: LABELS=$LABELS_REL
 
 notifications:
   email: false
