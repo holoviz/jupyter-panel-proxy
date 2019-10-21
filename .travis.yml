@@ -3,7 +3,7 @@ os: linux
 
 env:
   global:
-    - CHANS="-c pyviz"
+    - CHANS="-c conda-forge -c pyviz"
     - LABELS_DEV="--label dev"
     - LABELS_REL="--label dev --label main"
     - PYENV_VERSION=3.7
