@@ -9,8 +9,8 @@ on: [push]
   #     - '^v(\d+|\.)+[a-z]\d+$'
 
 env:
-  - PYENV_VERSION=3.7
-  - PKG_TEST_PYTHON="--test-python=py37 --test-python=py27"
+  - PYENV_VERSION: 3.7
+  - PKG_TEST_PYTHON: "--test-python=py37 --test-python=py27"
 
 jobs:
   build:
@@ -41,17 +41,17 @@ jobs:
 
     - name: dev_package
       env: 
-        - PYPI=testpypi 
-        - PYPIUSER=$TPPU 
-        - PYPIPASS=$TPPP
+        - PYPI: testpypi 
+        - PYPIUSER: $TPPU 
+        - PYPIPASS: $TPPP
       run: |
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
         doit package_upload -u $PYPIUSER -p $PYPIPASS --pypi ${PYPI}
 
     - name: release_package
       env:
-       - PYPI=pypi 
-       - PYPIUSER=$PPU 
-       - PYPIPASS=$PPP
+       - PYPI: pypi 
+       - PYPIUSER: $PPU 
+       - PYPIPASS: $PPP
       uses: dev_package
     
