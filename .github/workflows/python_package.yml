@@ -47,11 +47,3 @@ jobs:
       run: |
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
         doit package_upload -u $PYPIUSER -p $PYPIPASS --pypi ${PYPI}
-
-    - name: release_package
-      env:
-       PYPI: pypi 
-       PYPIUSER: $PPU 
-       PYPIPASS: $PPP
-      uses: dev_package
-    
