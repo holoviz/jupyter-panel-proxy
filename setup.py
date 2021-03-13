@@ -44,10 +44,10 @@ def get_setup_version(reponame):
         version = embed_version(basepath)
         log += "\n\n\n\nUsing version embed_version"
     log += "\n\n\nVersion: " +  str(version)
-    with open('log.txt', 'a') as f:
-        f.write(log)
+    print(f"::set-output name=myOutput::{log}")
     if version is not None:
         log+= "\n\n\n\nVersion: " + version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$") + "\n\n\n\n" 
+        print(f"::set-output name=myOutput::{log}")
         with open('log.txt', 'a') as f:
             f.write(log)
         return version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$")
