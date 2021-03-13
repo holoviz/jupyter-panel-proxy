@@ -41,6 +41,7 @@ def get_setup_version(reponame):
     except:
         version = embed_version(basepath)
     if version is not None:
+        print("\n\n\n\nVersion: ", version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$"),"\n\n\n\n" )
         return version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$")
     else:
         print("WARNING: param>=1.6.0 unavailable. If you are installing a package, this warning can safely be ignored. If you are creating a package or otherwise operating in a git repository, you should install param>=1.6.0.")
