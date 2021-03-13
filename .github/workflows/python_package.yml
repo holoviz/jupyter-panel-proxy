@@ -45,7 +45,5 @@ jobs:
         PYPIUSER: $TPPU 
         PYPIPASS: $TPPP
       run: |
+        python -c "from param import version; print(version)"
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
-
-    - name: read_log
-      run: cat log.txt
