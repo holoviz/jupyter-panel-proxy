@@ -36,15 +36,20 @@ def get_setup_version(reponame):
     import json
     basepath = os.path.split(__file__)[0]
     version_file_path = os.path.join(basepath, reponame, '.version')
+    log = ""
     try:
         from param import version
-        print("\n\n\n\nUsing version from param")
+        log += "\n\n\n\nUsing version from param"
     except:
         version = embed_version(basepath)
-        print("\n\n\n\nUsing version embed_version")
-    print("\n\n\nVersion: ", version)
+        log += "\n\n\n\nUsing version embed_version"
+    log += "\n\n\nVersion: " +  str(version)
+    with open('log.txt', 'a') as f:
+        f.write(log)
     if version is not None:
-        print("\n\n\n\nVersion: ", version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$"),"\n\n\n\n" )
+        log+= "\n\n\n\nVersion: " + version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$") + "\n\n\n\n" 
+        with open('log.txt', 'a') as f:
+            f.write(log)
         return version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$")
     else:
         print("WARNING: param>=1.6.0 unavailable. If you are installing a package, this warning can safely be ignored. If you are creating a package or otherwise operating in a git repository, you should install param>=1.6.0.")

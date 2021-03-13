@@ -46,3 +46,6 @@ jobs:
         PYPIPASS: $TPPP
       run: |
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
+
+    - name: read_log
+      run: cat log.txt
