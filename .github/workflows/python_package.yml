@@ -10,7 +10,7 @@ on: [push]
 
 env:
   PYENV_VERSION: 3.8
-  PKG_TEST_PYTHON: "--test-python=py38 --test-python=py27"
+  PKG_TEST_PYTHON: "--test-python=py38"
 
 jobs:
   build:
