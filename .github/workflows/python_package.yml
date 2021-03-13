@@ -45,5 +45,5 @@ jobs:
         PYPIUSER: $TPPU 
         PYPIPASS: $TPPP
       run: |
-        python -c "from param import version; print(version)"
+        python -c "from param import version; print(version); print(version.Version.setup_version('.', 'jupyter-panel-proxy', archive_commit="$Format:%h$")"
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
