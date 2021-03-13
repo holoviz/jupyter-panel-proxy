@@ -38,8 +38,11 @@ def get_setup_version(reponame):
     version_file_path = os.path.join(basepath, reponame, '.version')
     try:
         from param import version
+        print("\n\n\n\nUsing version from param")
     except:
         version = embed_version(basepath)
+        print("\n\n\n\nUsing version embed_version")
+    print("\n\n\nVersion: ", version)
     if version is not None:
         print("\n\n\n\nVersion: ", version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$"),"\n\n\n\n" )
         return version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$")
@@ -57,8 +60,8 @@ setuptools.setup(
     name="jupyter-panel-proxy",
     packages=setuptools.find_packages(),
     description='Jupyter Server Proxy for Panel applications',
-    # version=get_setup_version('panel_server'),
-    version='0.1.1',
+    version=get_setup_version('panel_server'),
+    #version='0.1.1',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     author= "Julia Signell",
