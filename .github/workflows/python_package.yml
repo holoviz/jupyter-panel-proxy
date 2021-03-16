@@ -46,7 +46,8 @@ jobs:
         PYPIPASS: $TPPP
       run: |
         pwd
+        ls
         touch /home/runner/work/jupyter-panel-proxy/jupyter-panel-proxy/.version
-        python -c "import os, json; f = open(os.path.join('.', 'jupyter-panel-proxy', '.version'), 'w'); f.write(json.dumps({'extracted_directory_tag':'test'})); f.close()"
+        python -c "import os, json; f = open(os.path.join('', 'jupyter-panel-proxy', '.version'), 'w'); f.write(json.dumps({'extracted_directory_tag':'test'})); f.close()"
         python -c "from param import version; print(version); print(version.Version.setup_version('.', 'jupyter-panel-proxy', archive_commit='$Format:%h$'))"
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
