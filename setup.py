@@ -36,10 +36,11 @@ def get_setup_version(reponame):
     import json
     basepath = os.path.split(__file__)[0]
     version_file_path = os.path.join(basepath, reponame, '.version')
-    try:
-        from param import version
-    except:
-        version = embed_version(basepath)
+    # try:
+    #     # from param import version
+    #     raise AssertionError
+    # except:
+    version = embed_version(basepath)
     if version is not None:
         return version.Version.setup_version(basepath, reponame, archive_commit="$Format:%h$")
     else:
