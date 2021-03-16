@@ -46,6 +46,6 @@ jobs:
         PYPIPASS: $TPPP
       run: |
         pwd
-        sudo chown -R $USER:$USER /home/github/actions-runner/_work/jupyter-panel-proxy
+        sudo chown -R $USER:$USER /home/runner/work/jupyter-panel-proxy/jupyter-panel-proxy
         python -c "from param import version; print(version); print(version.Version.setup_version('.', 'jupyter-panel-proxy', archive_commit='$Format:%h$'))"
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
