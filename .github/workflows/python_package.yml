@@ -47,5 +47,6 @@ jobs:
       run: |
         pwd
         sudo chown -R $USER:$USER /home/runner/work/jupyter-panel-proxy/jupyter-panel-proxy
+        touch /home/runner/work/jupyter-panel-proxy/jupyter-panel-proxy/.version
         python -c "from param import version; print(version); print(version.Version.setup_version('.', 'jupyter-panel-proxy', archive_commit='$Format:%h$'))"
         doit package_build $PKG_TEST_PYTHON --test-group=lint --sdist-install-build-deps
