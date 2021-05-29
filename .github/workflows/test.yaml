@@ -23,9 +23,8 @@ jobs:
         shell: bash -l {0}
     env:
       PYTHON_VERSION: ${{ matrix.python-version }}
-      CHANS_DEV: "-c pyviz/label/dev"
-      CHANS_OSX: "-c pyviz/label/dev -c conda-forge"
-      CHANS: "-c pyviz"
+      CHANS_DEV: "-c pyviz/label/dev -c conda-forge"
+      CHANS: "-c pyviz -c conda-forge"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
@@ -49,8 +48,8 @@ jobs:
         run: |
           eval "$(conda shell.bash hook)"
           conda activate test-environment
-          conda list
-          doit develop_install ${{ env.CHANS_DEV }} -o test
+          doit list
+          doit develop_install ${{ env.CHANS_DEV }} -o tests
       - name: doit env_capture
         run: |
           eval "$(conda shell.bash hook)"
