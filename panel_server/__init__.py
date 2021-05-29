@@ -1,6 +1,5 @@
 import fnmatch
 import glob
-import os
 import pathlib
 import yaml
 
@@ -48,7 +47,7 @@ def _search_apps(config):
         base_path = base_dir
     apps = []
     for ft in config.get('file_types'):
-        apps += [app for app in base_path.glob(f'**/*.{ft}')]
+        apps += [str(app) for app in base_path.glob(f'**/*.{ft}')]
     return apps
 
 
@@ -62,7 +61,7 @@ def _discover_apps():
         found_apps = _search_apps(config)
     exclude_patterns = config.get('exclude_patterns', []) + EXCLUDE_PATTERNS
     config['apps'] = [
-        app for app in apps
+        app for app in found_apps
         if not any(fnmatch.fnmatch(app, ep) for ep in exclude_patterns)
     ]
     return config
@@ -105,8 +104,8 @@ def setup_panel_server():
     spec = {
         'command': _launch_command,
         'absolute_url': True,
-        'timeout': 360,
+        'timeout': 360
     }
-    if 'launcher_entry' in spec:
-        spec['launcher_entry'] = spec['launcher_entry']
+    if 'launcher_entry' in config:
+        spec['launcher_entry'] = config['launcher_entry']
     return spec
