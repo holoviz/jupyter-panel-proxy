@@ -15,7 +15,7 @@ jobs:
       run:
         shell: bash -l {0}
     env:
-      CHANS: "-c pyviz"
+      CHANS: "-c pyviz -c conda-forge"
       CHANS_DEV: "-c pyviz/label/dev -c conda-forge"
       PKG_TEST_PYTHON: "--test-python=py37"
       PYTHON_VERSION: "3.7"
@@ -56,7 +56,7 @@ jobs:
       CHANS_DEV: "-c pyviz/label/dev"
       PKG_TEST_PYTHON: "--test-python=py37"
       PYTHON_VERSION: "3.7"
-      CHANS: "-c pyviz"
+      CHANS: "-c pyviz -c conda-forge"
       PPU: ${{ secrets.PPU }}
       PPP: ${{ secrets.PPP }}
       PYPI: "https://upload.pypi.org/legacy/"
