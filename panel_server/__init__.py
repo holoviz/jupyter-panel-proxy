@@ -57,7 +57,7 @@ def _discover_apps():
     if 'apps' in config:
         found_apps = []
         for app_spec in config.get('apps', []):
-            found_apps += glob.glob(app_spec)
+            found_apps += glob.glob(app_spec, recursive=True)
     else:
         found_apps = _search_apps(config)
     exclude_patterns = config.get('exclude_patterns', []) + EXCLUDE_PATTERNS
