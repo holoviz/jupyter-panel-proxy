@@ -22,6 +22,7 @@ The jupyter-panel-proxy provides the ability to configure the proxy server by de
 - `exclude_patterns` (`list(str)`): A list of glob/(fnmatch) patterns to exclude specific applications
 - `index` (`str`): The path to a Bokeh index template
 - `autoreload` (`bool`): Whether to automatically reload user sessions when the application or any of its imports change.
+- `admin` (`bool`): Whether to load panel's admin module.
 - `static_dirs` (`list`): A list of dicts mapping from server route to the static directory to be served 
 - `warm` (`bool`): Whether to execute scripts on startup to warm up the server.
 - `num_procs` (`int`): Number of worker processes for an app. Using 0 will autodetect number of cores (defaults to 1)

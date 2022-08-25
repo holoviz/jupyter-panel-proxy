@@ -24,6 +24,7 @@ LAUNCHER_ENTRY = {
 
 DEFAULT_CONFIG = {
     'autoreload': True,
+    'admin': True,
     'file_types': ['ipynb', 'py'],
     'launcher_entry': LAUNCHER_ENTRY
 }
@@ -87,7 +88,7 @@ def _launch_command(port):
         command += ['--oauth-encryption-key', Fernet.generate_key()]
         command += ['--cookie-secret', generate_secret_key()]
     if 'oauth_key' in config:
-        command += ['--oauth-key', config['oauth_key']]    
+        command += ['--oauth-key', config['oauth_key']]
     if 'oauth_secret' in config:
         command += ['--oauth-secret', config['oauth_secret']]
     if 'oauth_redirect_uri' in config:
