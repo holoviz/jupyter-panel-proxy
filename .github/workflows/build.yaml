@@ -20,7 +20,7 @@ jobs:
       PKG_TEST_PYTHON: "--test-python=py37"
       PYTHON_VERSION: "3.7"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Fetch unshallow
         run: git fetch --prune --tags --unshallow -f
       - uses: actions/setup-python@v2
@@ -61,7 +61,7 @@ jobs:
       PPP: ${{ secrets.PPP }}
       PYPI: "https://upload.pypi.org/legacy/"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Fetch unshallow
         run: git fetch --prune --tags --unshallow -f
       - uses: actions/setup-python@v2
