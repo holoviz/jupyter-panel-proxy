@@ -30,7 +30,7 @@ setup_args = dict(
     url="https://github.com/holoviz/jupyter-panel-proxy",
     project_urls = {
         "Bug Tracker": "http://github.com/holoviz/jupyter-panel-proxy/issues",
-        "Documentation": "https://github.com/holoviz/jupyter-panel-proxy/blob/master/README.md",
+        "Documentation": "https://github.com/holoviz/jupyter-panel-proxy/blob/main/README.md",
         "Source Code": "https://github.com/holoviz/jupyter-panel-proxy",
     },
     platforms=['Windows', 'Mac OS X', 'Linux'],
