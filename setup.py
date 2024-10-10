@@ -54,6 +54,7 @@ setup_args = dict(
     install_requires=['jupyter-server-proxy', 'panel >=0.11'],
     extras_require=extras_require,
     packages=find_packages(),
+    include_package_data=True,
     entry_points={
         'jupyter_serverproxy_servers': [
             'panel = panel_server:setup_panel_server',

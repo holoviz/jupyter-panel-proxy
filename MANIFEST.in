@@ -1,5 +1,6 @@
 include README.md
 include LICENSE
 include panel_server/.version
+include panel_server/icons/*.svg
 global-exclude *.py[co]
 global-exclude *~
