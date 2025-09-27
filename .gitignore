@@ -8,3 +8,5 @@ __pycache__
 
 ## pyctdev
 .doit.db
+
+panel_server/_version.py
