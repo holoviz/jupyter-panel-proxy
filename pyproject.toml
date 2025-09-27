@@ -13,7 +13,7 @@ maintainers = [
     {name = "HoloViz developers", email = "developers@pyviz.org"}
 ]
 license = "BSD-3-Clause"
-license-files = ["LICENSE.txt"]
+license-files = ["LICENSE"]
 classifiers = [
     "License :: OSI Approved :: BSD License",
     "Development Status :: 5 - Production/Stable",
@@ -39,16 +39,15 @@ dependencies = [
 dynamic = ["version"]
 
 [project.urls]
-"Bug Tracker" = "http://github.com/holoviz/jupyter-panel-proxy/issues"
+"Homepage" = "https://github.com/holoviz-dev/jupyter-panel-proxy"
+"Source" = "https://github.com/holoviz-dev/jupyter-panel-proxy"
+"BugTracker" = "https://github.com/holoviz-dev/jupyter-panel-proxy/issues"
 "Documentation" = "https://github.com/holoviz/jupyter-panel-proxy/blob/main/README.md"
 "Source Code" = "https://github.com/holoviz/jupyter-panel-proxy"
 
 [project.optional-dependencies]
 tests = [
-    "flake8",
-    "twine",
-    "rfc3986",
-    "keyring"
+    "pytest",
 ]
 
 [project.entry-points."jupyter_serverproxy_servers"]
