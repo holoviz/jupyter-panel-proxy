@@ -17,7 +17,6 @@ defaults:
 
 env:
   PYTHON_VERSION: "3.11"
-  PACKAGE: "jupyter-panel-proxy"
 
 jobs:
   waiting_room:
@@ -122,7 +121,7 @@ jobs:
       - name: Install package
         run: python -m pip install dist/*.whl
       - name: Import package
-        run: python -c "import $PACKAGE; print($PACKAGE._version.__version__)"
+        run: python -c "import $MODULE; print($MODULE._version.__version__)"
 
   pip_publish:
     name: Publish PyPI
