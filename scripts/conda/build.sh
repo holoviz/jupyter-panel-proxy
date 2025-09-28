@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 MODULE="panel_server"
-PACKAGE="jupyter_panel_proxy"
+PACKAGE="jupyter-panel-proxy"
 
 python -m build --sdist .
 
