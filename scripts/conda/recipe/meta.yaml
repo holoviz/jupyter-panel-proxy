@@ -1,0 +1,56 @@
+{% set pyproject = load_file_data('../../../pyproject.toml', from_recipe_dir=True) %}
+{% set buildsystem = pyproject['build-system'] %}
+{% set project = pyproject['project'] %}
+
+{% set name = project['name'] %}
+{% set version = VERSION %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: ../../../dist/{{ name|lower|replace("-", "_") }}-{{ version }}.tar.gz
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install --no-deps -vv .
+  entry_points:
+    {% for group,epoints in project.get("entry_points",{}).items() %}
+    {% for entry_point in epoints %}
+    - {{ entry_point }}
+    {% endfor %}
+    {% endfor %}
+
+requirements:
+  build:
+    - python {{ project['requires-python'] }}
+    - pip
+    {% for dep in buildsystem['requires'] %}
+    - {{ dep }}
+    {% endfor %}
+
+  run:
+    - python {{ project['requires-python'] }}
+    {% for dep in project.get('dependencies', []) %}
+    - {{ dep }}
+    {% endfor %}
+
+test:
+  requires:
+    {% for dep in project['optional-dependencies']['tests'] %}
+    - {{ dep }}
+    {% endfor %}
+  source_files:
+    - pyproject.toml
+    - panel_server/tests
+  imports:
+    - panel_server
+  commands:
+    - pytest panel_server/tests
+
+about:
+  home: {{ project['urls']['Homepage'] }}
+  summary: {{ project['description'] }}
+  license: {{ project['license'] }}
+  license: {{ project['license-files'] }}

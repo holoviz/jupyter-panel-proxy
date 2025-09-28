@@ -7,14 +7,14 @@ When jupyter-panel-proxy is installed and you launch a Jupyter server (Notebook,
 The `jupyter-panel-proxy` is available from `pip`:
 
     pip install jupyter-panel-proxy
-    
+
 and conda:
 
     conda install -c pyviz jupyter-panel-proxy
 
 ## Configuration
 
-The jupyter-panel-proxy provides the ability to configure the proxy server by declaring a `jupyter-panel-proxy.yml` in the directory the Jupyter server is being launched from. The `yaml` file may declare the following keys: 
+The jupyter-panel-proxy provides the ability to configure the proxy server by declaring a `jupyter-panel-proxy.yml` in the directory the Jupyter server is being launched from. The `yaml` file may declare the following keys:
 
 - `apps` (`list`): A list of applications or glob patterns to serve
 - `launcher_entry` (`dict`): A [jupyter-server-proxy launcher entry specification](https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#launcher-entry)
@@ -22,7 +22,7 @@ The jupyter-panel-proxy provides the ability to configure the proxy server by de
 - `exclude_patterns` (`list(str)`): A list of glob/(fnmatch) patterns to exclude specific applications
 - `index` (`str`): The path to a Bokeh index template
 - `autoreload` (`bool`): Whether to automatically reload user sessions when the application or any of its imports change.
-- `static_dirs` (`list`): A list of dicts mapping from server route to the static directory to be served 
+- `static_dirs` (`list`): A list of dicts mapping from server route to the static directory to be served
 - `warm` (`bool`): Whether to execute scripts on startup to warm up the server.
 - `num_procs` (`int`): Number of worker processes for an app. Using 0 will autodetect number of cores (defaults to 1)
 - `oauth_provider` (`str`): The OAuth2 provider to use.

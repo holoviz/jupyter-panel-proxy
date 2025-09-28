@@ -3,8 +3,11 @@ lib/
 node_modules/
 *.egg-info/
 __pycache__
-.version
+.venv
 
+panel_server/_version.py
 
-## pyctdev
-.doit.db
+.pixi
+pixi.lock
+
+dist

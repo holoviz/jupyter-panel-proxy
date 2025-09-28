@@ -1,0 +1,17 @@
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-toml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+        exclude: (\.min\.js$|\.svg$)
+      - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.13.2
+    hooks:
+      - id: ruff
+        exclude: \.ipynb
