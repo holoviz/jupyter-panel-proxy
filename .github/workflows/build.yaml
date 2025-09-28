@@ -17,6 +17,7 @@ defaults:
 
 env:
   PYTHON_VERSION: "3.11"
+  MODULE: "panel_server"
 
 jobs:
   waiting_room:
