@@ -1,6 +1,67 @@
 [build-system]
-requires = [
-    "param >=1.7.0",
-    "setuptools",
-    "wheel",
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jupyter-panel-proxy"
+description = "Jupyter Server Proxy for Panel applications"
+readme = "README.md"
+authors = [
+    {name = "Julia Signell", email = "developers@holoviz.org"}
 ]
+maintainers = [
+    {name = "HoloViz developers", email = "developers@pyviz.org"}
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "jupyter-server-proxy",
+    "pyyaml",
+    "panel>=0.11"
+]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/holoviz-dev/jupyter-panel-proxy"
+"Source" = "https://github.com/holoviz-dev/jupyter-panel-proxy"
+"BugTracker" = "https://github.com/holoviz-dev/jupyter-panel-proxy/issues"
+"Documentation" = "https://github.com/holoviz/jupyter-panel-proxy/blob/main/README.md"
+"Source Code" = "https://github.com/holoviz/jupyter-panel-proxy"
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+]
+
+[project.entry-points."jupyter_serverproxy_servers"]
+panel = "panel_server:setup_panel_server"
+
+[tool.hatch.version]
+source = "vcs"
+raw-options = { version_scheme = "no-guess-dev" }
+
+[tool.hatch.build.targets.wheel]
+include = ["panel_server"]
+
+[tool.hatch.build.targets.sdist]
+include = ["panel_server"]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "panel_server/_version.py"

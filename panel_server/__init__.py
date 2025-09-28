@@ -1,16 +1,10 @@
 import fnmatch
 import glob
 import pathlib
+
 import yaml
 
-import param
-
-__version__ = str(
-    param.version.Version(
-        fpath=__file__,
-        archive_commit="$Format:%h$",
-        reponame="panel_server",
-))
+from .__version import __version__  # noqa: F401
 
 EXCLUDE_PATTERNS = ['*setup.py', '*dodo.py', '*.ipynb_checkpoints*']
 
