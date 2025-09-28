@@ -18,6 +18,7 @@ LAUNCHER_ENTRY = {
 
 DEFAULT_CONFIG = {
     'autoreload': True,
+    'admin': True,
     'file_types': ['ipynb', 'py'],
     'launcher_entry': LAUNCHER_ENTRY
 }
@@ -68,6 +69,8 @@ def _launch_command(port):
         command.append('--autoreload')
     if config.get('warm'):
         command.append('--warm')
+    if config.get('admin'):
+        command.append('--admin')
     if 'num_procs' in config:
         command += ['--num-procs', str(config['num_procs'])]
     if 'static_dirs' in config:
