@@ -1,5 +1,30 @@
 # Jupyter Server Proxy for Panel
 
+<table>
+<tbody>
+<tr>
+<td>Downloads</td>
+<td><a href="https://pypistats.org/packages/jupyter-panel-proxy"><img src="https://img.shields.io/pypi/dm/jupyter-panel-proxy?label=pypi" alt="PyPi Downloads" /></a></td>
+</tr>
+<tr>
+<td>Build Status</td>
+<td><a href="https://github.com/holoviz/jupyter-panel-proxy/actions/workflows/test.yaml?query=branch%3Amain"><img src="https://github.com/holoviz/jupyter-panel-proxy/workflows/tests/badge.svg?query=branch%3Amain" alt="Linux/MacOS Build Status"></a></td>
+</tr>
+<tr>
+<td>Latest dev release</td>
+<td><a href="https://github.com/holoviz/jupyter-panel-proxy/tags"><img src="https://img.shields.io/github/v/tag/holoviz/jupyter-panel-proxy.svg?label=tag&amp;colorB=11ccbb" alt="Github tag"></a></td>
+</tr>
+<tr>
+<td>Latest release</td>
+<td><a href="https://github.com/holoviz/jupyter-panel-proxy/releases"><img src="https://img.shields.io/github/release/holoviz/jupyter-panel-proxy.svg?label=tag&amp;colorB=11ccbb" alt="Github release"></a> <a href="https://pypi.python.org/pypi/jupyter-panel-proxy"><img src="https://img.shields.io/pypi/v/jupyter-panel-proxy.svg?colorB=cc77dd" alt="PyPI version"></a> <a href="https://anaconda.org/pyviz/jupyter-panel-proxy"><img src="https://img.shields.io/conda/v/pyviz/jupyter-panel-proxy.svg?colorB=4488ff&amp;style=flat" alt="panel version"></a> <a href="https://anaconda.org/conda-forge/jupyter-panel-proxy"><img src="https://img.shields.io/conda/v/conda-forge/jupyter-panel-proxy.svg?label=conda%7Cconda-forge&amp;colorB=4488ff" alt="conda-forge version"></a></td>
+</tr>
+<td>Support</td>
+<td><a href="https://discourse.holoviz.org/"><img src="https://img.shields.io/discourse/status?server=https%3A%2F%2Fdiscourse.holoviz.org" alt="Discourse"></a> <a href="https://discord.gg/rb6gPXbdAr"><img alt="Discord" src="https://img.shields.io/discord/1075331058024861767"></a>
+</td>
+</tr>
+</tbody>
+</table>
+
 `jupyter-panel-proxy` integrates [HoloViz Panel](https://panel.holoviz.org) seamlessly with Jupyter environments (Notebook, JupyterLab, and JupyterHub).  
 When installed, it launches a Panel server automatically at the `/panel` endpoint of your running Jupyter server.  
 
@@ -105,9 +130,11 @@ The discovery logic works like this:
 
 3. The discovered list of applications is then passed to `panel serve`.
 
-## Example configuration
+## Example YAML configuration
 
 ```yaml
+# jupyter-panel-proxy.yml
+
 log_level: info
 liveness: true
 liveness_endpoint: /health
