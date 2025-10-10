@@ -5,7 +5,7 @@ When installed, it launches a Panel server automatically at the `/panel` endpoin
 
 Visiting `/panel` will display an index of all available applications, and each application can be accessed at `/panel/<name_of_file>`.
 
-## When to Use This Project
+## When to use this project
 
 Use `jupyter-panel-proxy` when you want to:
 
@@ -39,7 +39,7 @@ https://<your-jupyter-server>/panel
 
 You can configure the behavior of the proxy server by creating a `jupyter-panel-proxy.yml` file in the directory from which your Jupyter server is launched.
 
-### Available Configuration Keys
+### Available configuration keys
 
 | Key                          | Type        | Description                                                                                                                        |
 | ---------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,11 +78,15 @@ You can configure the behavior of the proxy server by creating a `jupyter-panel-
 | `cookie_secret`              | `str`       | Secret key for secure cookies (can also be set via `PANEL_COOKIE_SECRET`).                                                         |
 | `oauth_encryption_key`       | `str`       | Encryption key for OAuth user info (can also be set via `OAUTH_ENCRYPTION_KEY`).                                                   |
 
-Of course — here’s a section you can drop into the README (just after or near the **“Configuration”** section) to explain **how app discovery works** and how to configure it:
+## Launcher
 
----
+When you install `jupyter-panel-proxy`, it automatically adds a Panel Launcher card to the JupyterLab and Notebook launcher interface:
 
-## Application Discovery
+![Panel launcher tile](https://raw.githubusercontent.com/holoviz/jupyter-panel-proxy/refs/heads/main/doc/jupyter_panel_proxy_tile.png)
+
+Clicking this Panel tile opens a new browser tab at `/panel` where your Panel apps are served. This behavior is controlled by the `launcher_entry` field in the configuration.
+
+## Application discovery
 
 By default, `jupyter-panel-proxy` automatically discovers Panel applications in the current working directory (or in an `examples/` subdirectory if present).
 
@@ -101,7 +105,7 @@ The discovery logic works like this:
 
 3. The discovered list of applications is then passed to `panel serve`.
 
-## Example Configuration
+## Example configuration
 
 ```yaml
 log_level: info
@@ -110,19 +114,19 @@ liveness_endpoint: /health
 global_loading_spinner: true
 ```
 
-## How It Works
+## How it works
 
 * When the Jupyter server starts, this proxy registers `/panel` as a route.
 * When a user navigates to `/panel`, the proxy launches `panel serve` internally with the configured options.
 * Apps are discovered automatically or defined explicitly.
 * The Panel server runs under the same authentication/session as Jupyter, and can optionally integrate OAuth for additional controls.
 
-## Further Reading
+## Further reading
 
 * [Panel Documentation](https://panel.holoviz.org)
 * [Jupyter Server Proxy](https://jupyter-server-proxy.readthedocs.io)
 * [HoloViz](https://holoviz.org)
 
-## 🧾 License
+## License
 
 BSD-3-Clause
