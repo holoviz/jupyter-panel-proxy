@@ -1,34 +1,128 @@
 # Jupyter Server Proxy for Panel
 
-When jupyter-panel-proxy is installed and you launch a Jupyter server (Notebook, JupyterLab or JupyterHub), a Panel server will be launched when you visit the `/panel` endpoint of the server. This will show an index of all applications being served, to launch a particular application visit the corresponding endpoint `/panel/<name_of_file>`.
+`jupyter-panel-proxy` integrates [HoloViz Panel](https://panel.holoviz.org) seamlessly with Jupyter environments (Notebook, JupyterLab, and JupyterHub).  
+When installed, it launches a Panel server automatically at the `/panel` endpoint of your running Jupyter server.  
+
+Visiting `/panel` will display an index of all available applications, and each application can be accessed at `/panel/<name_of_file>`.
+
+## When to Use This Project
+
+Use `jupyter-panel-proxy` when you want to:
+
+- *Serve Panel apps* alongside Jupyter notebooks or JupyterHub — without managing a separate web server.
+- *Reuse existing authentication* from JupyterHub and optionally integrate OAuth2 for finer-grained control.
+- *Automatically discover and serve multiple Panel apps* in a directory structure (no manual `panel serve` required).
+- *Deploy lightweight dashboards and interactive apps* close to your notebooks or lab environment.
+- *Run Panel behind a reverse proxy* with clean URL prefixing (`/panel`), and modern server features.
 
 ## Installation
 
-The `jupyter-panel-proxy` is available from `pip`:
+You can install `jupyter-panel-proxy` from PyPI:
 
-    pip install jupyter-panel-proxy
+```bash
+pip install jupyter-panel-proxy
+````
 
-and conda:
+or from conda:
 
-    conda install -c pyviz jupyter-panel-proxy
+```bash
+conda install conda-forge::jupyter-panel-proxy
+```
+
+Once installed, a Panel server will be available at:
+
+```
+https://<your-jupyter-server>/panel
+```
 
 ## Configuration
 
-The jupyter-panel-proxy provides the ability to configure the proxy server by declaring a `jupyter-panel-proxy.yml` in the directory the Jupyter server is being launched from. The `yaml` file may declare the following keys:
+You can configure the behavior of the proxy server by creating a `jupyter-panel-proxy.yml` file in the directory from which your Jupyter server is launched.
 
-- `apps` (`list`): A list of applications or glob patterns to serve
-- `launcher_entry` (`dict`): A [jupyter-server-proxy launcher entry specification](https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#launcher-entry)
-- `file_types` (`list(str)`): A list of file types to serve if no explicit apps list is provided
-- `exclude_patterns` (`list(str)`): A list of glob/(fnmatch) patterns to exclude specific applications
-- `index` (`str`): The path to a Bokeh index template
-- `autoreload` (`bool`): Whether to automatically reload user sessions when the application or any of its imports change.
-- `admin` (`bool`): Whether to load panel's admin module.
-- `static_dirs` (`list`): A list of dicts mapping from server route to the static directory to be served
-- `warm` (`bool`): Whether to execute scripts on startup to warm up the server.
-- `num_procs` (`int`): Number of worker processes for an app. Using 0 will autodetect number of cores (defaults to 1)
-- `oauth_provider` (`str`): The OAuth2 provider to use.
-- `oauth-key` (`str`): The OAuth2 key to use
-- `oauth-secret` (`str`): The OAuth2 secret to use
-- `oauth-redirect-uri` (`str`): The OAuth2 redirect URI
-- `oauth_extra_params` (`dict`): Additional parameters to the OAuth provider.
-- `oauth_jwt_user` (`str`): The key in the ID JWT token to consider the user.
+### Available Configuration Keys
+
+| Key                          | Type        | Description                                                                                                                        |
+| ---------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `apps`                       | `list`      | List of apps or glob patterns to serve. If not set, apps are discovered automatically by file type.                                |
+| `file_types`                 | `list(str)` | File extensions to auto-discover apps (default: `ipynb`, `py`).                                                                    |
+| `exclude_patterns`           | `list(str)` | Glob/fnmatch patterns to exclude apps.                                                                                             |
+| `launcher_entry`             | `dict`      | A [jupyter-server-proxy launcher entry](https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#launcher-entry). |
+| `index`                      | `str`       | Path to a custom Bokeh index template.                                                                                             |
+| `autoreload`                 | `bool`      | Automatically reload sessions when code changes.                                                                                   |
+| `admin`                      | `bool`      | Enable Panel's admin module.                                                                                                       |
+| `warm`                       | `bool`      | Execute apps on startup to warm up the server.                                                                                     |
+| `num_procs`                  | `int`       | Number of worker processes (0 = auto).                                                                                             |
+| `num_threads`                | `int`       | Number of threads in the thread pool.                                                                                              |
+| `static_dirs`                | `list`      | Key=value routes for serving static files.                                                                                         |
+| `reuse_sessions`             | `bool`      | Reuse existing sessions (recommended for JupyterHub).                                                                              |
+| `keep_alive`                 | `int` (ms)  | Interval for keep-alive pings to clients.                                                                                          |
+| `check_unused_sessions`      | `int` (ms)  | How often to check for unused sessions.                                                                                            |
+| `unused_session_lifetime`    | `int` (ms)  | How long unused sessions last.                                                                                                     |
+| `websocket_max_message_size` | `int`       | Max message size for WebSocket in bytes.                                                                                           |
+| `root_path`                  | `str`       | Root path can be used to handle cases where Panel is served behind a proxy.                                                        |
+| `cookie_path`                | `str`       | Path to apply cookies to.                                                                                                          |
+| `log_level`                  | `str`       | Log level (`info`, `debug`, etc.).                                                                                                 |
+| `liveness`                   | `bool`      | Enable a liveness endpoint.                                                                                                        |
+| `liveness_endpoint`          | `str`       | Path of the liveness endpoint (default: `/liveness`).                                                                              |
+| `profiler`                   | `str`       | Profiler to use (e.g. `pyinstrument`).                                                                                             |
+| `global_loading_spinner`     | `bool`      | Add a global loading spinner to the UI.                                                                                            |
+| `oauth_provider`             | `str`       | OAuth2 provider name.                                                                                                              |
+| `oauth_key`                  | `str`       | OAuth2 key.                                                                                                                        |
+| `oauth_secret`               | `str`       | OAuth2 secret.                                                                                                                     |
+| `oauth_redirect_uri`         | `str`       | OAuth2 redirect URI.                                                                                                               |
+| `oauth_extra_params`         | `dict`      | Additional parameters for the OAuth provider.                                                                                      |
+| `oauth_jwt_user`             | `str`       | JWT key to identify the user.                                                                                                      |
+| `oauth_optional`             | `bool`      | Allow guest access to all endpoints.                                                                                               |
+| `oauth_guest_endpoints`      | `list(str)` | List of endpoints accessible without authentication.                                                                               |
+| `cookie_secret`              | `str`       | Secret key for secure cookies (can also be set via `PANEL_COOKIE_SECRET`).                                                         |
+| `oauth_encryption_key`       | `str`       | Encryption key for OAuth user info (can also be set via `OAUTH_ENCRYPTION_KEY`).                                                   |
+
+Of course — here’s a section you can drop into the README (just after or near the **“Configuration”** section) to explain **how app discovery works** and how to configure it:
+
+---
+
+## Application Discovery
+
+By default, `jupyter-panel-proxy` automatically discovers Panel applications in the current working directory (or in an `examples/` subdirectory if present).
+
+The discovery logic works like this:
+
+1. If `apps` is defined in `jupyter-panel-proxy.yml`:
+
+   * Each entry is interpreted as a file path or glob pattern.
+   * All matching files are included.
+
+2. If `apps` is not defined:
+
+   * The proxy scans the base directory (or `./examples` if it exists) recursively.
+   * It includes files that match any extension listed in `file_types` (default: `ipynb`, `py`).
+   * It excludes any paths that match `exclude_patterns` (by default, this includes common patterns like `*setup.py` or `*.ipynb_checkpoints*`).
+
+3. The discovered list of applications is then passed to `panel serve`.
+
+## Example Configuration
+
+```yaml
+autoreload: true
+log_level: info
+liveness: true
+liveness_endpoint: /health
+global_loading_spinner: true
+```
+
+## How It Works
+
+* When the Jupyter server starts, this proxy registers `/panel` as a route.
+* When a user navigates to `/panel`, the proxy launches `panel serve` internally with the configured options.
+* Apps are discovered automatically or defined explicitly.
+* The Panel server runs under the same authentication/session as Jupyter, and can optionally integrate OAuth for additional controls.
+
+## Further Reading
+
+* [Panel Documentation](https://panel.holoviz.org)
+* [Jupyter Server Proxy](https://jupyter-server-proxy.readthedocs.io)
+* [HoloViz](https://holoviz.org)
+
+## 🧾 License
+
+BSD-3-Clause
