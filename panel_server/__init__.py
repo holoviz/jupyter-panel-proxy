@@ -18,7 +18,7 @@ LAUNCHER_ENTRY = {
 }
 
 DEFAULT_CONFIG = {
-    'autoreload': True,
+    'dev': True,
     'file_types': ['ipynb', 'py'],
     'launcher_entry': LAUNCHER_ENTRY
 }

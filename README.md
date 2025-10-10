@@ -48,7 +48,8 @@ You can configure the behavior of the proxy server by creating a `jupyter-panel-
 | `exclude_patterns`           | `list(str)` | Glob/fnmatch patterns to exclude apps.                                                                                             |
 | `launcher_entry`             | `dict`      | A [jupyter-server-proxy launcher entry](https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#launcher-entry). |
 | `index`                      | `str`       | Path to a custom Bokeh index template.                                                                                             |
-| `autoreload`                 | `bool`      | Automatically reload sessions when code changes.                                                                                   |
+| `autoreload`                 | `bool`      | Automatically reload sessions when code changes. It is recommended to use `dev` instead.                                           |
+| `dev       `                 | `bool`      | Automatically reload sessions when code changes.                                                                                   |
 | `admin`                      | `bool`      | Enable Panel's admin module.                                                                                                       |
 | `warm`                       | `bool`      | Execute apps on startup to warm up the server.                                                                                     |
 | `num_procs`                  | `int`       | Number of worker processes (0 = auto).                                                                                             |
@@ -103,7 +104,6 @@ The discovery logic works like this:
 ## Example Configuration
 
 ```yaml
-autoreload: true
 log_level: info
 liveness: true
 liveness_endpoint: /health
