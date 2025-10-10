@@ -130,7 +130,7 @@ def _launch_command(port):
 
         encryption_key = config.get('oauth_encryption_key') or os.environ.get('OAUTH_ENCRYPTION_KEY')
         if not encryption_key:
-            encryption_key = Fernet.generate_key().decode()
+            encryption_key = Fernet.generate_key()
         command += ['--oauth-encryption-key', encryption_key]
 
         cookie_secret = config.get('cookie_secret') or os.environ.get('PANEL_COOKIE_SECRET')
