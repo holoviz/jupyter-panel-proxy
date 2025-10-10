@@ -25,8 +25,8 @@
 </tbody>
 </table>
 
-`jupyter-panel-proxy` integrates [HoloViz Panel](https://panel.holoviz.org) seamlessly with Jupyter environments (Notebook, JupyterLab, and JupyterHub).  
-When installed, it launches a Panel server automatically at the `/panel` endpoint of your running Jupyter server.  
+`jupyter-panel-proxy` integrates [HoloViz Panel](https://panel.holoviz.org) seamlessly with Jupyter environments (Notebook, JupyterLab, and JupyterHub).
+When installed, it launches a Panel server automatically at the `/panel` endpoint of your running Jupyter server.
 
 Visiting `/panel` will display an index of all available applications, and each application can be accessed at `/panel/<name_of_file>`.
 
