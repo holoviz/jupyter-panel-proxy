@@ -19,7 +19,6 @@ LAUNCHER_ENTRY = {
 
 DEFAULT_CONFIG = {
     'autoreload': True,
-    'admin': True,
     'file_types': ['ipynb', 'py'],
     'launcher_entry': LAUNCHER_ENTRY
 }
